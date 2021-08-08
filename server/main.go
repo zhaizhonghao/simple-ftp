@@ -5,6 +5,7 @@ import (
 	"net"
 	"os"
 	"runtime"
+	"strings"
 	"time"
 )
 
@@ -35,7 +36,7 @@ func Handler(conn net.Conn) {
 		buf := make([]byte, 2048)
 		n, _ := conn.Read(buf)
 		//结束协程
-		if string(buf[:n]) == "finish" {
+		if strings.Contains(string(buf[:n]), "finish") {
 			fmt.Println(addr + ": 接受结束")
 			fmt.Println("time for transmission", time.Since(start))
 			conn.Write([]byte("over"))

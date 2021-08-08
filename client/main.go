@@ -36,6 +36,7 @@ func SendFile(filePath string, fileSize int64, conn net.Conn) {
 		//打印上传进度
 		fmt.Println("文件上传：" + value + "%")
 	}
+	fmt.Println("waiting for response!")
 	buf := make([]byte, 2048)
 	//读取服务端内容
 	n, err := conn.Read(buf)
@@ -63,6 +64,7 @@ func main() {
 	}
 	//创建客户端连接
 	start := time.Now()
+	//conn, err := net.Dial("tcp", "10.166.33.72:8000")
 	conn, err := net.Dial("tcp", ":8000")
 	if err != nil {
 		fmt.Println(err)
